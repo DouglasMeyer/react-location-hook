@@ -21,13 +21,16 @@
     "build": "rm -rf lib && npm run build:lib && npm run build:es",
     "build:es": "BABEL_ENV=es babel src --out-dir es --ignore __*,*.story.js,*.test.js",
     "build:lib": "babel src --out-dir lib --ignore __*,*.story.js,*.test.js",
+    "build:examples": "rm -rf examples_dist ; (cd examples ; npm run build) && mv examples/dist examples_dist",
+    "deploy": "npm run build:examples && git-directory-deploy --directory examples_dist --branch gh-pages",
     "dev": "jest --watch",
     "lint": "eslint src/.",
     "precommit": "lint-staged",
     "postcommit": "git reset",
     "prepublish": "npm run build",
     "pretty": "prettier 'src/**/*.js' --write --no-semi --single-quote --trailing-comma all",
-    "test": "eslint src/. && jest"
+    "test": "eslint src/. && jest",
+    "postpublish": "npm run deploy"
   },
   "lint-staged": {
     "src/**/*.js": [
@@ -74,7 +77,6 @@
       ]
     }
   },
-  "dependencies": {},
   "peerDependencies": {
     "prop-types": "^15.5.10",
     "react": ">16.8.0"
@@ -95,6 +97,7 @@
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.1.0",
+    "git-directory-deploy": "^1.5.1",
     "history": "^5.0.0",
     "jest": "^20.0.4",
     "lint-staged": "^4.0.2",
