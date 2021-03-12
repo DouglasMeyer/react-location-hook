@@ -1,25 +1,101 @@
 {
-  "name": "react-history-hook",
-  "version": "0.0.1",
-  "description": "Simply manage history in React",
-  "main": "./src/index.js",
-  "scripts": {
-    "start": "parcel src/index.js",
-    "build": "parcel build src/index.js",
-    "test": "jest"
+  "name": "react-location-hook",
+  "version": "0.1.0",
+  "description": "Simply use history in React",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "jsnext:main": "es/index.js",
+  "author": "Douglas Meyer",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/douglasmeyer/react-location-hook"
   },
-  "keywords": [],
-  "author": "Douglas Meyer <me@douglas-meyer.name> (http://douglas-meyer.name/)",
   "license": "MIT",
-  "devDependencies": {
-    "@babel/preset-env": "^7.12.17",
-    "@babel/preset-react": "^7.12.13",
-    "@testing-library/react-hooks": "^5.0.3",
-    "babel-jest": "^26.6.3",
-    "jest": "^26.6.3",
-    "parcel-bundler": "^1.12.4"
+  "keywords": [
+    "react",
+    "history",
+    "route",
+    "routing"
+  ],
+  "scripts": {
+    "build": "rm -rf lib && npm run build:lib && npm run build:es",
+    "build:es": "BABEL_ENV=es babel src --out-dir es --ignore __*,*.story.js,*.test.js",
+    "build:lib": "babel src --out-dir lib --ignore __*,*.story.js,*.test.js",
+    "dev": "jest --watch",
+    "lint": "eslint src/.",
+    "precommit": "lint-staged",
+    "postcommit": "git reset",
+    "prepublish": "npm run build",
+    "pretty": "prettier 'src/**/*.js' --write --no-semi --single-quote --trailing-comma all",
+    "test": "eslint src/. && jest"
   },
-  "dependencies": {
-    "history": "^5.0.0"
+  "lint-staged": {
+    "src/**/*.js": [
+      "prettier --write --no-semi --single-quote --trailing-comma all",
+      "eslint",
+      "git add"
+    ]
+  },
+  "babel": {
+    "presets": [
+      "env",
+      "react",
+      "stage-2"
+    ],
+    "env": {
+      "es": {
+        "presets": [
+          [
+            "env",
+            {
+              "modules": false
+            }
+          ],
+          "react",
+          "stage-2"
+        ]
+      }
+    }
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "prettier",
+      "prettier/react"
+    ],
+    "rules": {
+      "jsx-a11y/href-no-hash": 0,
+      "no-unused-vars": [2, { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }]
+    }
+  },
+  "dependencies": {},
+  "peerDependencies": {
+    "prop-types": "^15.5.10",
+    "react": "^0.14.0 || ^15.0.0"
+  },
+  "devDependencies": {
+    "@testing-library/react-hooks": "^5.0.3",
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.25.0",
+    "babel-eslint": "^8.0.0",
+    "babel-jest": "^20.0.3",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "eslint": "^4.3.0",
+    "eslint-config-prettier": "^2.3.0",
+    "eslint-config-react-app": "^2.0.0",
+    "eslint-plugin-flowtype": "^2.35.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.1.0",
+    "history": "^5.0.0",
+    "jest": "^20.0.4",
+    "lint-staged": "^4.0.2",
+    "minimist": "1.2.0",
+    "prettier": "^1.5.3",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-test-renderer": "^17.0.1"
   }
 }

@@ -1,0 +1,6 @@
+# Ignore snapshots
+*.snap
+
+# Ignore dist
+dist/**
+lib/**
