@@ -1,6 +1,6 @@
 {
   "name": "react-location-hook",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Simply use history in React",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -65,7 +65,13 @@
     ],
     "rules": {
       "jsx-a11y/href-no-hash": 0,
-      "no-unused-vars": [2, { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }]
+      "no-unused-vars": [
+        2,
+        {
+          "varsIgnorePattern": "^_",
+          "argsIgnorePattern": "^_"
+        }
+      ]
     }
   },
   "dependencies": {},
